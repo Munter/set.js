@@ -8,6 +8,9 @@
   "directories": {
     "lib": "."
   },
+  "devDependencies": {
+    "vows":    "*"
+  },
   "scripts": {
     "test": "vows tests.js"
   },
