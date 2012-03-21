@@ -37,38 +37,39 @@ var value = true
   }
 
 var Set = function(input){
-  var set
+  this.set = unique(input || [])
+}
 
-  this.contains = function(prop){
-    return !!set[prop]
-  }
+Set.prototype = {
+  contains: function(prop){
+    return !!this.set[prop]
+  },
 
-  this.empty = function(){
-    return Object.keys(set).length == 0
-  }
+  empty: function(){
+    return Object.keys(this.set).length == 0
+  },
 
-  this.size = function(){
-    return Object.keys(set).length
-  }
+  size: function(){
+    return Object.keys(this.set).length
+  },
 
-  this.get = function(){
-    return Object.keys(set)
-  }
+  get: function(){
+    return Object.keys(this.set)
+  },
 
-  this.add = function(prop){
-    set[prop] = value
-  }
+  add: function(prop){
+    this.set[prop] = value
+  },
 
-  this.remove = function(prop){
-    delete set[prop]
-  }
+  remove: function(prop){
+    delete this.set[prop]
+  },
 
-  this.union = function(iset){
+  union: function(iset){
     return new Set(this.get().concat(iset.get()))
-  }
+  },
 
-
-  this.intersect = function(iset){
+  intersect: function(iset){
     var items = iset.get()
       , i = 0
       , l = items.length
@@ -92,9 +93,9 @@ var Set = function(input){
     }
 
     return oset
-  }
+  },
 
-  this.difference = function(iset){
+  difference: function(iset){
     var items = iset.get()
       , i = 0
       , l = items.length
@@ -109,9 +110,9 @@ var Set = function(input){
     }
 
     return oset
-  }
+  },
 
-  this.subset = function(iset){
+  subset: function(iset){
     var items = iset.get()
       , subset = false
       , i = 0
@@ -129,17 +130,15 @@ var Set = function(input){
     }
 
     return subset
-  }
+  },
 
-  this.find = function(pred){
+  find: function(pred){
     return this.get().filter(pred)
-  }
+  },
 
-  this.clear = function(){
-    set = {}
+  clear: function(){
+    this.set = {}
   }
-
-  set = unique(input || [])
 }
 
 Set.unique = function(iset){
